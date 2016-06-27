@@ -74,7 +74,7 @@ function effect_magic_process_effect($image, $data) {
 	image_save($image, $img_src);
 
 	// now invoke command
-	$parts = preg_split('/(?<!\\\)\s/', trim($data['im_command']));
+	$parts = preg_split('/(?<!\\\)\s+/', trim($data['im_command']));
 
 	// must reference source image
 	if (!in_array('%src', $parts)) array_unshift($parts, '%src');
