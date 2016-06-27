@@ -93,8 +93,10 @@ function effect_magic_process_effect($image, $data) {
 
 	foreach ($parts as &$_) $_ = escapeshellarg($_);
 
-
 	$cmd = "convert " .implode(' ', $parts);
+  // Log like this because errors from the command go here without a timestamp
+  // so important to have some context.
+  error_log("effect_magic running $cmd");
 	exec($cmd, $output, $return);
 	if ($return=='0')
 	{
