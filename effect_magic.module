@@ -10,11 +10,14 @@ function effect_magic_form_image_effect_form_alter(&$form, &$form_state, $hook) 
  * Save a copy of the command to watchdog. This is useful when you muck up a complex command.
  */
 function effect_magic_save_previous_config($form, &$form_state) {
-  watchdog('effect_magic', "New effect on %style: %cmd",
-    [
-      '%style' => $form_state['image_style']['name'],
-      '%cmd' => $form_state['values']['data']['im_command'],
-    ], WATCHDOG_INFO);
+
+  if (!empty($form_state['values']['data']['im_command'])) {
+    watchdog('effect_magic', "New effect on %style: %cmd",
+      [
+        '%style' => $form_state['image_style']['name'],
+        '%cmd' => $form_state['values']['data']['im_command'],
+      ], WATCHDOG_INFO);
+  }
 }
 /**
   * @file Effect Magic module
