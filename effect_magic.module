@@ -42,7 +42,9 @@ function effect_magic_form($data) {
 	$form['im_command'] = array(
 			'#type' => 'textarea',
 			'#title' => 'Command line.',
-			'#description' => 'Source %src will be prepended if not present. Do not put output file.',
+      '#description' => 'Source %src will be prepended if not present. Do not put output file. 
+Note: if you need to include arguments with spaces escape them with a <code>\</code>. e.g. <code>-fx i/w<0.2\ ?\ 1\ :\ 0</code>. You do not need to escape things that the shell usually needs escaping, e.g. brackets. Just separate arguments with a single space.
+',
 			'#default_value' => isset($data['im_command']) ? $data['im_command'] : '',
 			'#required' => true,
 			);
