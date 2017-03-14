@@ -95,8 +95,10 @@ function effect_magic_process_effect($image, $data) {
 
 	foreach ($parts as &$_) $_ = escapeshellarg($_);
 
-
 	$cmd = "convert " .implode(' ', $parts);
+  // Log like this because errors from the command go here without a timestamp
+  // so important to have some context.
+  error_log("effect_magic running $cmd");
 	exec($cmd, $output, $return);
 	if ($return=='0')
 	{
@@ -109,7 +111,10 @@ function effect_magic_process_effect($image, $data) {
 		$image->resource = $new_image->resource;
 		$return=true;
 	}
-	else $return = false;
+  else {
+    $return = false;
+    watchdog('effect_magic', "Failed running %cmd", ['%cmd' => $cmd], WATCHDOG_ERROR);
+  }
 
 	unlink($img);
 	unlink($img_src);
