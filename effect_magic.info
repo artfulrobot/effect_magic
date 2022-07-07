@@ -1,6 +1,0 @@
-name = Effect Magic
-description = Use Imagemagick to create an image effect
-package = Artful Robot
-core = 7.x
-
-files[] = effect_magic.module
